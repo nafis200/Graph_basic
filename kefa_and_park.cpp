@@ -8,27 +8,46 @@ int cats[N];
 int consecutive[N];
 int ans;
 int n, m;
-void dfs(int u)
-{
+// void dfs(int u)
+// {
+//     vis[u] = true;
+//     bool ok = true;
+//     if (consecutive[u] > m)
+//     {
+//         return;
+//     }
+//     for (auto it : g[u])
+//     {
+//         if (vis[it] == false)
+//         {
+//             ok = false;
+//             if(cats[it]){
+//                 consecutive[it] = consecutive[u] + cats[it];
+//             }
+//             dfs(it);
+//         }
+//     }
+//     if (ok)
+//     {
+//         ans++;
+//     }
+// }
+void dfs(int u, int p){
+    if(cats[u]){
+        consecutive[u] = consecutive[p] + 1;
+    }
     vis[u] = true;
     bool ok = true;
-    if (consecutive[u] > m)
-    {
+    if(consecutive[u] > m){
         return;
     }
-    for (auto it : g[u])
-    {
-        if (vis[it] == false)
-        {
+    for(auto it : g[u]){
+        if(vis[it] == false){
             ok = false;
-            if(cats[it]){
-                consecutive[it] = consecutive[u] + cats[it];
-            }
-            dfs(it);
+            dfs(it, u);
         }
     }
-    if (ok)
-    {
+    if(ok){
         ans++;
     }
 }
@@ -57,6 +76,6 @@ int main()
         vis[it] = false;
     }
     consecutive[1] = cats[1];
-    dfs(1);
+    dfs(1,0);
     cout << ans << "\n";
 }

@@ -48,7 +48,7 @@ int main()
         int u, v;
         cin >> u >> v;
         g[u].push_back(v);
-        g[v].push_back(u);
+        // g[v].push_back(u);
     }
    for(int i = 1; i <= n; i++){ 
         if(!vis[i]){ 
